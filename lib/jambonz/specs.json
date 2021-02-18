@@ -176,8 +176,7 @@
     "required": [
       "botId",
       "botAlias",
-      "region",
-      "prompt"
+      "region"
     ]
   },
   "listen": {

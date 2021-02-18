@@ -1,0 +1,21 @@
+{
+  "dial": {
+    "actionHook": "http://example.com",
+    "callerId": "+1312888899",
+    "target": [
+      {
+        "type": "phone",
+        "number": "+15083084809"
+      }
+    ],
+    "transcribe": {
+      "transcriptionHook": "/transcribe",
+      "recognizer": {
+        "vendor": "google",
+        "language" : "en-US",
+        "dualChannel" : true,
+        "interim": true
+      }
+    }
+  }
+}

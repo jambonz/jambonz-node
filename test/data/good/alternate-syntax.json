@@ -1,0 +1,31 @@
+[
+  {
+    "verb": "gather",
+    "actionHook": "https://00dd977a.ngrok.io/gather",
+    "input": ["speech"],
+    "timeout": 12,
+    "recognizer": {
+      "vendor": "google",
+      "language": "en-US",
+      "hints": ["sales", "support", "engineering", "human resources", "HR", "operator", "agent"]  
+    },
+    "say": {
+      "text": "Please say the name of the department that you would like to speak with.  To speak to an operator, just say operator.",
+      "synthesizer": {
+        "vendor": "google",
+        "language": "en-US"
+      }
+    }
+  },
+  {
+    "verb": "say",
+    "text": "I'm sorry, I did not hear a response.  Goodbye.",
+    "synthesizer": {
+      "vendor": "google",
+      "language": "en-US"
+    }
+  },
+  {
+    "verb": "hangup"
+  }
+]

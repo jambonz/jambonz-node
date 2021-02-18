@@ -1,0 +1,12 @@
+{
+  "dial": {
+    "actionHook": "http://example.com",
+    "callerId": "+1312888899",
+    "target": [
+      {
+        "type": "user",
+        "name": "spike@sip.example.com"
+      }
+    ]
+  }
+}

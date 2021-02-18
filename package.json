@@ -1,0 +1,29 @@
+{
+  "name": "@jambonz/node-client",
+  "version": "0.0.1",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "NODE_ENV=test node test/ | ./node_modules/.bin/tap-spec",
+    "coverage": "./node_modules/.bin/nyc --reporter html --report-dir ./coverage npm run test",
+    "jslint": "eslint app.js lib"
+  },
+  "author": "Dave Horton",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:jambonz/jambonz-node.git"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "bent": "^7.3.12",
+    "eslint": "^7.20.0",
+    "eslint-plugin-promise": "^4.3.1",
+    "nyc": "^15.1.0",
+    "pino": "^6.11.1"
+  },
+  "devDependencies": {
+    "blue-tape": "^1.0.0",
+    "clear-module": "^4.1.1",
+    "tap-spec": "^5.0.0"
+  }
+}

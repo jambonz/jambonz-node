@@ -1,0 +1,21 @@
+{
+  "dial": {
+    "actionHook": "http://example.com",
+    "callerId": "+1312888899",
+    "target": [
+      {
+        "type": "phone",
+        "number": "+15083084809"
+      }
+    ],
+    "listen": {
+      "url": "wss://myrecorder.example.com:4433",
+      "mixType" : "stereo",
+      "sampleRate": 8000,
+      "passDtmf": true,
+      "metadata": {
+        "clientId": "12udih"
+      }
+    }
+  }
+}

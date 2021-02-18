@@ -1,0 +1,387 @@
+{
+  "sip_decline": {
+    "properties": {
+      "status": "number",
+      "reason": "string",
+      "headers": "object"
+    },
+    "required": [
+      "status"
+    ]
+  },
+  "dequeue": {
+    "properties": {
+      "name": "string",
+      "actionHook": "object|string",
+      "timeout": "number",
+      "beep": "boolean"
+    },
+    "required": [
+      "name"
+    ]
+  },
+  "enqueue": {
+    "properties": {
+      "name": "string",
+      "actionHook": "object|string",
+      "waitHook": "object|string",
+      "_": "object"
+    },
+    "required": [
+      "name"
+    ]
+  },
+  "leave": {
+    "properties": {
+      
+    }
+  },
+  "hangup": {
+    "properties": {
+      "headers": "object"
+    },
+    "required": [
+    ]
+  },
+  "play": {
+    "properties": {
+      "url": "string",
+      "loop": "number",
+      "earlyMedia": "boolean"
+    },
+    "required": [
+      "url"
+    ]
+  },
+  "say": {
+    "properties": {
+      "text": "string|array",
+      "loop": "number",
+      "synthesizer": "#synthesizer",
+      "earlyMedia": "boolean"
+    },
+    "required": [
+      "text"
+    ]
+  },
+  "gather": {
+    "properties": {
+      "actionHook": "object|string",
+      "finishOnKey": "string",
+      "input": "array",
+      "numDigits": "number",
+      "partialResultHook": "object|string",
+      "speechTimeout": "number",
+      "timeout": "number",
+      "recognizer": "#recognizer",
+      "play": "#play",
+      "say": "#say"
+    },
+    "required": [
+      "actionHook"
+    ]
+  },
+  "conference": {
+    "properties": {
+      "name": "string",
+      "beep": "boolean",
+      "startConferenceOnEnter": "boolean",
+      "endConferenceOnExit": "boolean",
+      "maxParticipants": "number",
+      "actionHook": "object|string",
+      "waitHook": "object|string",
+      "statusEvents": "array",
+      "statusHook": "object|string",
+      "enterHook": "object|string"
+    },
+    "required": [
+      "name"
+    ]
+  },
+  "dial": {
+    "properties": {
+      "actionHook": "object|string",
+      "answerOnBridge": "boolean",
+      "callerId": "string",
+      "confirmHook": "object|string",
+      "dialMusic": "string",
+      "dtmfCapture": "object",
+      "dtmfHook": "object|string",
+      "headers": "object",
+      "listen": "#listen",
+      "target": ["#target"],
+      "timeLimit": "number",
+      "timeout": "number",
+      "proxy": "string",
+      "transcribe": "#transcribe"
+    },
+    "required": [
+      "target"
+    ]
+  },
+  "dialogflow": {
+    "properties": {
+      "credentials": "object|string",
+      "project": "string",
+      "environment": "string",
+      "lang": "string",
+      "actionHook": "object|string",
+      "eventHook": "object|string",
+      "events": "[string]",
+      "welcomeEvent": "string",
+      "welcomeEventParams": "object",
+      "noInputTimeout": "number",
+      "noInputEvent": "string",
+      "passDtmfAsTextInput": "boolean",
+      "thinkingMusic": "string",
+      "tts": "#synthesizer",
+      "bargein": "boolean"
+    },
+    "required": [
+      "project",
+      "credentials",
+      "lang"
+    ]
+  },
+  "dtmf": {
+    "properties": {
+      "dtmf": "string",
+      "duration": "number"
+    },
+    "required": [
+      "dtmf"
+    ]
+  },
+  "lex": {
+    "properties": {
+      "botId": "string",
+      "botAlias": "string",
+      "credentials": "object",
+      "region": "string",
+      "locale": "string",
+      "intent": "#lexIntent",
+      "welcomeMessage": "string",
+      "metadata": "object",
+      "bargein": "boolean",
+      "passDtmf": "boolean",
+      "actionHook": "object|string",
+      "eventHook": "object|string",
+      "prompt": {
+        "type": "string",
+        "enum": ["lex", "tts"]
+      },
+      "noInputTimeout": "number",
+      "tts": "#synthesizer"
+    },
+    "required": [
+      "botId",
+      "botAlias",
+      "region",
+      "prompt"
+    ]
+  },
+  "listen": {
+    "properties": {
+      "actionHook": "object|string",
+      "auth": "#auth",
+      "finishOnKey": "string",
+      "maxLength": "number",
+      "metadata": "object",
+      "mixType": {
+        "type": "string",
+        "enum": ["mono", "stereo", "mixed"]
+      },
+      "passDtmf": "boolean",
+      "playBeep": "boolean",
+      "sampleRate": "number",
+      "timeout": "number",
+      "transcribe": "#transcribe",
+      "url": "string",
+      "wsAuth": "#auth",
+      "earlyMedia": "boolean"
+    },
+    "required": [
+      "url"
+    ]
+  },
+  "message": {
+    "properties": {
+      "provider": "string",
+      "to": "string",
+      "from": "string",
+      "text": "string",
+      "media": "string|array",
+      "actionHook": "object|string"
+    },
+    "required": [
+      "to",
+      "from"
+    ]
+  },
+  "pause": {
+    "properties": {
+      "length": "number"
+    },
+    "required": [
+      "length"
+    ]
+  },
+  "redirect": {
+    "properties": {
+      "actionHook": "object|string"
+    },
+    "required": [
+      "actionHook"
+    ]
+  },
+  "rest_dial": {
+    "properties": {
+      "account_sid": "string",
+      "application_sid": "string",
+      "call_hook": "object|string",
+      "call_status_hook": "object|string",
+      "from": "string",
+      "speech_synthesis_vendor": "string",
+      "speech_synthesis_voice": "string",
+      "speech_synthesis_language": "string",
+      "speech_recognizer_vendor": "string",
+      "speech_recognizer_language": "string",
+      "tag": "object",
+      "to": "#target",
+      "headers": "object",
+      "timeout": "number"
+    },
+    "required": [
+      "call_hook",
+      "from",
+      "to"
+    ]
+  },
+  "tag": {
+    "properties": {
+      "data": "object"
+    },
+    "required": [
+      "data"
+    ]
+  },
+  "transcribe": {
+    "properties": {
+      "transcriptionHook": "string",
+      "recognizer": "#recognizer",
+      "earlyMedia": "boolean"
+    },
+    "required": [
+      "transcriptionHook",
+      "recognizer"
+    ]
+  },
+  "target": {
+    "properties": {
+      "type": {
+        "type": "string",
+        "enum": ["phone", "sip", "user", "teams"]
+      },
+      "confirmHook": "object|string",
+      "method": {
+        "type": "string",
+        "enum": ["GET", "POST"]
+      },
+      "name": "string",
+      "number": "string",
+      "sipUri": "string",
+      "auth": "#auth",
+      "vmail": "boolean",
+      "tenant": "string"
+    },
+    "required": [
+      "type"
+    ]
+  },
+  "auth": {
+    "properties": {
+      "username": "string",
+      "password": "string"
+    },
+    "required": [
+      "username",
+      "password"
+    ]
+  },
+  "synthesizer": {
+    "properties": {
+      "vendor": {
+        "type": "string",
+        "enum": ["google", "aws", "polly", "default"]
+      },
+      "language": "string",
+      "voice": "string",
+      "gender": {
+        "type": "string",
+        "enum": ["MALE", "FEMALE", "NEUTRAL"]
+      }
+    },
+    "required": [
+      "vendor"
+    ]
+  },
+  "recognizer": {
+    "properties": {
+      "vendor": {
+        "type": "string",
+        "enum": ["google", "aws", "default"]
+      },
+      "language": "string",
+      "hints": "array",
+      "altLanguages": "array",
+      "profanityFilter": "boolean",
+      "interim": "boolean",
+      "singleUtterance": "boolean",
+      "dualChannel": "boolean",
+      "separateRecognitionPerChannel": "boolean",
+      "punctuation": "boolean",
+      "enhancedModel": "boolean",
+      "words": "boolean",
+      "diarization": "boolean",
+      "diarizationMinSpeakers": "number",
+      "diarizationMaxSpeakers": "number",
+      "interactionType": {
+        "type": "string",
+        "enum": [
+          "unspecified",
+          "discussion",
+          "presentation",
+          "phone_call",
+          "voicemail",
+          "voice_search",
+          "voice_command",
+          "dictation"
+        ]
+      },
+      "naicsCode": "number",
+      "identifyChannels": "boolean",
+      "vocabularyName": "string",
+      "vocabularyFilterName": "string",
+      "filterMethod": {
+        "type": "string",
+        "enum": [
+          "remove",
+          "mask",
+          "tag"
+        ]
+      }
+    },
+    "required": [
+      "vendor"
+    ]
+  },
+  "lexIntent": {
+    "properties": {
+      "name": "string",
+      "slots": "object"
+    },
+    "required": [
+      "name"
+    ]
+  }
+}

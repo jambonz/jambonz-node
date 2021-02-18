@@ -54,7 +54,7 @@ An example of using the client to perform live control to play a whisper prompt 
 
 ### Example 
 
-See [here]() for a full-featured example application built using this API.
+See [here](https://github.com/jambonz/jambonz-node-example-app) for a full-featured example application built using this API.
 
 ### Status
 This project is under active development and is currently very much pre-beta.

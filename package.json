@@ -6,7 +6,7 @@
   "scripts": {
     "test": "NODE_ENV=test node test/ | ./node_modules/.bin/tap-spec",
     "coverage": "./node_modules/.bin/nyc --reporter html --report-dir ./coverage npm run test",
-    "jslint": "eslint app.js lib"
+    "jslint": "eslint lib"
   },
   "author": "Dave Horton",
   "repository": {

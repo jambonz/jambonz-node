@@ -32,7 +32,9 @@ app.listen(port, () => {
 [See here](https://docs.jambonz.org/jambonz/) for information on the available verbs you can use in a jambonz application, and for their associated properties.
 
 ### REST API calls
-To use the REST API you need to know your account sid (which you can see in the jambonz portal), and an api key (which you can generate in the jambonz portal).  You generate a REST client as shown below.
+
+#### Creating a client
+To use the REST API you need to know your account sid and api key (both of which you can view in the jambonz portal).  You generate a REST client as shown below.
 ```
 const client = require('@jambonz/node-client')(<my-account-sid>, <my-api-key>, {
   baseUrl: http://<my-jambonz-sbc>
@@ -41,8 +43,26 @@ const client = require('@jambonz/node-client')(<my-account-sid>, <my-api-key>, {
 
 All of the above parameters are required (account sid, api key, and baseUrl);
 
-An example of using the client to perform live control to play a whisper prompt to the caller is shown below:
+#### Calls
+##### Creating a call
 ```
+const sid = await client.calls.create({
+  from: '16172223333',
+  to: {
+    type: 'phone',
+    number: '15083084808'
+  },
+  call_hook: 'http://myurl.com/myapp-webhook',
+  call_status_hook: 'http://myurl.com/call-status'
+});
+```
+[See here](https://docs.jambonz.org/rest/#create-a-call) for further details.
+
+##### Updating a call
+To update a call in progress -- for example to mute/unmute, hangup the call etc -- you need to know the call sid.  Typically you would get this from a webhook sent from an existing call event.
+
+```
+  // play a whisper prompt to one party on the call
   await client.calls.update(<my-call-sid>, {
     whisper: {
         verb: 'say',
@@ -51,6 +71,7 @@ An example of using the client to perform live control to play a whisper prompt 
     }
   });
 ```
+[See here](https://docs.jambonz.org/rest/#updating-a-call) for further details.
 
 ### Example 
 

@@ -1,5 +1,4 @@
-const test = require('blue-tape');
-const assert = require('assert');
+const test = require('tape');
 
 const fetchData = (json) => {
   const keys = Object.keys(json);

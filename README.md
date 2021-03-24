@@ -13,16 +13,16 @@ app.use(express.json());
 
 app.post('/my-app', (req, res) => {
   const jambonz = new WebhookResponse();
-    jambonz
-      .pause({length: 1.5})
-      .say({
-        text: 'Good morning. This is a simple test of text to speech functionality.  That is all.  Goodbye',
-        synthesizer: {
-          vendor: 'google',
-          language: 'en-US'
-        }
-      });
-    res.status(200).json(app);
+  jambonz
+    .pause({length: 1.5})
+    .say({
+      text: 'Good morning. This is a simple test of text to speech functionality.  That is all.  Goodbye',
+      synthesizer: {
+        vendor: 'google',
+        language: 'en-US'
+      }
+    });
+  res.status(200).json(app);
 });
 
 app.listen(port, () => {

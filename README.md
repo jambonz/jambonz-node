@@ -31,6 +31,30 @@ app.listen(port, () => {
 ```
 [See here](https://docs.jambonz.org/jambonz/) for information on the available verbs you can use in a jambonz application, and for their associated properties.
 
+#### Verifying webhook signature
+If your jambonz server includes a Jambonz-Signature header on webhook requests, you can verify that the request was signed by jambonz using your webhook secret as follows:
+
+```
+const {WebhookResponse} = require('@jambonz/node-client');
+
+if (process.env.WEBHOOK_SECRET) {
+  app.use(WebhookResponse.verifyJambonzSignature(process.env.WEBHOOK_SECRET));
+}
+
+const express = require('express');
+const app = express();
+
+app.use(express.json());
+
+/* make sure this comes after the body has been converted to json */
+if (process.env.WEBHOOK_SECRET) {
+  app.use(WebhookResponse.verifyJambonzSignature(process.env.WEBHOOK_SECRET));
+}
+
+/* if we get here we know the request was signed with our webhook secret */
+app.post('/my-app', (req, res) => { ...})
+```
+
 ### REST API calls
 
 #### Creating a client

@@ -2,10 +2,12 @@
 
 A Node.js SDK for the open source [jambonz](docs.jambonz.org) CPaaS platform.  Node.js applications can use this library to respond to [jambonz webhooks](https://docs.jambonz.org/jambonz/) and to make [REST API calls](https://docs.jambonz.org/rest/) to a jambonz platform.
 
+> Note: One suggested way to get up and running with this Node SDK is to use the `npx create-jambonz-app` command, which will scaffold out a jambonz application for you using this SDK.
+
 ### Webooks
 To respond to webhooks, you will need a lightweight http server.  An example is shown below using [express](expressjs.com).
 ```
-const WebhookResponse = require('@jambonz/node-client').WebhookResponse;
+const {WebhookResponse} = require('@jambonz/node-client');
 const express = require('express');
 const app = express();
 

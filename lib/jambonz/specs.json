@@ -1,5 +1,5 @@
 {
-  "sip_decline": {
+  "sip:decline": {
     "properties": {
       "status": "number",
       "reason": "string",
@@ -124,6 +124,10 @@
       "credentials": "object|string",
       "project": "string",
       "environment": "string",
+      "region": {
+        "type": "string",
+        "enum": ["europe-west1", "europe-west2", "australia-southeast1", "asia-northeast1"]
+      },
       "lang": "string",
       "actionHook": "object|string",
       "eventHook": "object|string",
@@ -166,17 +170,14 @@
       "passDtmf": "boolean",
       "actionHook": "object|string",
       "eventHook": "object|string",
-      "prompt": {
-        "type": "string",
-        "enum": ["lex", "tts"]
-      },
       "noInputTimeout": "number",
       "tts": "#synthesizer"
     },
     "required": [
       "botId",
       "botAlias",
-      "region"
+      "region",
+      "credentials"
     ]
   },
   "listen": {
@@ -205,7 +206,9 @@
   },
   "message": {
     "properties": {
-      "provider": "string",
+      "carrier": "string",
+      "account_sid": "string",
+      "message_sid": "string",
       "to": "string",
       "from": "string",
       "text": "string",
@@ -225,6 +228,19 @@
       "length"
     ]
   },
+  "rasa": {
+    "properties": {
+      "url": "string",
+      "recognizer": "#recognizer",
+      "tts": "#synthesizer",
+      "prompt": "string",
+      "actionHook": "object|string",
+      "eventHook": "object|string"
+    },
+    "required": [
+      "url"
+    ]
+  },
   "redirect": {
     "properties": {
       "actionHook": "object|string"
@@ -233,7 +249,7 @@
       "actionHook"
     ]
   },
-  "rest_dial": {
+  "rest:dial": {
     "properties": {
       "account_sid": "string",
       "application_sid": "string",

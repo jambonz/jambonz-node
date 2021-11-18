@@ -53,6 +53,14 @@
       "url"
     ]
   },
+  "record": {
+    "properties": {
+      "path": "string"
+    },
+    "required": [
+      "path"
+    ]
+  },
   "say": {
     "properties": {
       "text": "string|array",
@@ -92,7 +100,8 @@
       "waitHook": "object|string",
       "statusEvents": "array",
       "statusHook": "object|string",
-      "enterHook": "object|string"
+      "enterHook": "object|string",
+      "record": "#record"
     },
     "required": [
       "name"

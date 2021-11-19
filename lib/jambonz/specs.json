@@ -9,7 +9,7 @@
       "status"
     ]
   },
-  "sip:refer": {
+  "sip_refer": {
     "properties": {
       "referTo": "string",
       "referredBy": "string",

@@ -29,7 +29,8 @@
       "tts": "#synthesizer",
       "prompt": "string",
       "actionHook": "object|string",
-      "eventHook": "object|string"
+      "eventHook": "object|string",
+      "data": "object"
     },
     "required": [
       "url",
@@ -344,7 +345,8 @@
       "auth": "#auth",
       "vmail": "boolean",
       "tenant": "string",
-      "trunk": "string"
+      "trunk": "string",
+      "overrideTo": "string"
     },
     "required": [
       "type"

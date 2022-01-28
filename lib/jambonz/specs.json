@@ -81,14 +81,6 @@
       "url"
     ]
   },
-  "record": {
-    "properties": {
-      "path": "string"
-    },
-    "required": [
-      "path"
-    ]
-  },
   "say": {
     "properties": {
       "text": "string|array",
@@ -114,7 +106,6 @@
       "say": "#say"
     },
     "required": [
-      "actionHook"
     ]
   },
   "conference": {
@@ -124,6 +115,7 @@
       "startConferenceOnEnter": "boolean",
       "endConferenceOnExit": "boolean",
       "maxParticipants": "number",
+      "joinMuted": "boolean",
       "actionHook": "object|string",
       "waitHook": "object|string",
       "statusEvents": "array",
@@ -278,6 +270,14 @@
       "url"
     ]
   },
+  "record": {
+    "properties": {
+      "path": "string"
+    },
+    "required": [
+      "path"
+    ]
+  },
   "redirect": {
     "properties": {
       "actionHook": "object|string"
@@ -324,7 +324,6 @@
       "earlyMedia": "boolean"
     },
     "required": [
-      "transcriptionHook",
       "recognizer"
     ]
   },
@@ -370,7 +369,7 @@
       },
       "language": "string",
       "voice": "string",
-      "platform": {
+      "engine": {
         "type": "string",
         "enum": ["standard", "neural"]
       },

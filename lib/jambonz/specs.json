@@ -460,8 +460,13 @@
     ]
   },
   "vad": {
-    "enable": "boolean",
-    "voiceMs": "number",
-    "mode": "number"
+    "properties": {
+      "enable": "boolean",
+      "voiceMs": "number",
+      "mode": "number"  
+    },
+    "required": [
+      "enable"
+    ]
   }
 }

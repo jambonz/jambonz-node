@@ -321,13 +321,7 @@
     "properties": {
       "transcriptionHook": "string",
       "recognizer": "#recognizer",
-      "earlyMedia": "boolean",
-      "vad": {
-        "enable": "boolean",
-        "voiceMs": "number",
-        "mode": "number"
-      }
-
+      "earlyMedia": "boolean"
     },
     "required": [
       "recognizer"
@@ -395,6 +389,11 @@
         "enum": ["google", "aws", "microsoft", "default"]
       },
       "language": "string",
+      "vad": {
+        "enable": "boolean",
+        "voiceMs": "number",
+        "mode": "number"
+      },
       "hints": "array",
       "altLanguages": "array",
       "profanityFilter": "boolean",

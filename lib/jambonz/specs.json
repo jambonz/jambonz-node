@@ -333,6 +333,7 @@
         "type": "string",
         "enum": ["phone", "sip", "user", "teams"]
       },
+      "headers": "object",
       "confirmHook": "object|string",
       "method": {
         "type": "string",

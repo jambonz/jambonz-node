@@ -321,7 +321,13 @@
     "properties": {
       "transcriptionHook": "string",
       "recognizer": "#recognizer",
-      "earlyMedia": "boolean"
+      "earlyMedia": "boolean",
+      "vad": {
+        "enable": "boolean",
+        "voiceMs": "number",
+        "mode": "number"
+      }
+
     },
     "required": [
       "recognizer"

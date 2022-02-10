@@ -389,11 +389,7 @@
         "enum": ["google", "aws", "microsoft", "default"]
       },
       "language": "string",
-      "vad": {
-        "enable": "boolean",
-        "voiceMs": "number",
-        "mode": "number"
-      },
+      "vad": "#vad",
       "hints": "array",
       "altLanguages": "array",
       "profanityFilter": "boolean",
@@ -462,5 +458,10 @@
     "required": [
       "name"
     ]
+  },
+  "vad": {
+    "enable": "boolean",
+    "voiceMs": "number",
+    "mode": "number"
   }
 }

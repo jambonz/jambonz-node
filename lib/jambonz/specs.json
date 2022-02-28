@@ -25,13 +25,13 @@
     "properties": {
       "synthesizer": "#synthesizer",
       "recognizer": "#recognizer",
-      "bot-mode": "#botMode"
+      "botMode": "#botMode"
     },
     "required": []
   },
   "botMode": {
     "properties": {
-      "enabled": "boolean",
+      "enable": "boolean",
       "gather": "#gather"  
     },
     "required": [

@@ -142,6 +142,7 @@
       "answerOnBridge": "boolean",
       "callerId": "string",
       "confirmHook": "object|string",
+      "referHook": "object|string",
       "dialMusic": "string",
       "dtmfCapture": "object",
       "dtmfHook": "object|string",

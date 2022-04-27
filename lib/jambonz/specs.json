@@ -280,6 +280,7 @@
       "recognizer": "#recognizer",
       "tts": "#synthesizer",
       "prompt": "string",
+      "thinkingMusic": "string",
       "actionHook": "object|string",
       "eventHook": "object|string"
     },

@@ -281,6 +281,7 @@
       "tts": "#synthesizer",
       "prompt": "string",
       "thinkingMusic": "string",
+      "timeout": "number",
       "actionHook": "object|string",
       "eventHook": "object|string"
     },

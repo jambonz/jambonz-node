@@ -32,6 +32,7 @@
   "bargeIn": {
     "properties": {
       "enable": "boolean",
+      "sticky": "boolean",
       "actionHook": "object|string",
       "input": "array",
       "finishOnKey": "string",
@@ -280,8 +281,6 @@
       "recognizer": "#recognizer",
       "tts": "#synthesizer",
       "prompt": "string",
-      "thinkingMusic": "string",
-      "timeout": "number",
       "actionHook": "object|string",
       "eventHook": "object|string"
     },
@@ -352,12 +351,12 @@
         "type": "string",
         "enum": ["phone", "sip", "user", "teams"]
       },
-      "headers": "object",
       "confirmHook": "object|string",
       "method": {
         "type": "string",
         "enum": ["GET", "POST"]
       },
+      "headers": "object",
       "name": "string",
       "number": "string",
       "sipUri": "string",
@@ -411,6 +410,7 @@
       "language": "string",
       "vad": "#vad",
       "hints": "array",
+      "hintsBoost": "number",
       "altLanguages": "array",
       "profanityFilter": "boolean",
       "interim": "boolean",
@@ -448,6 +448,7 @@
           "tag"
         ]
       },
+      "model": "string",
       "outputFormat": {
         "type": "string",
         "enum": [
@@ -464,7 +465,8 @@
         ]
       },
       "requestSnr": "boolean",
-      "initialSpeechTimeoutMs": "number"
+      "initialSpeechTimeoutMs": "number",
+      "azureServiceEndpoint": "string"
     },
     "required": [
       "vendor"

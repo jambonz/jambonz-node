@@ -9,6 +9,17 @@
       "status"
     ]
   },
+  "sip_request": {
+    "properties": {
+      "method": "string",
+      "body": "string",
+      "headers": "object",
+      "actionHook": "object|string"
+    },
+    "required": [
+      "method"
+    ]
+  },
   "sip_refer": {
     "properties": {
       "referTo": "string",

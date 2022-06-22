@@ -318,7 +318,7 @@
       "siprecServerURL": "string"
     },
     "required": [
-      "type"
+      "action"
     ]
   },
   "redirect": {

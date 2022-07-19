@@ -1,6 +1,6 @@
 {
   "name": "@jambonz/node-client",
-  "version": "0.3.21",
+  "version": "0.3.22",
   "description": "Node.js client for building jambonz applications (jambonz.org)",
   "main": "lib/index.js",
   "scripts": {
@@ -21,8 +21,8 @@
     "pino": "^7.8.0"
   },
   "devDependencies": {
-    "eslint": "^7.20.0",
-    "eslint-plugin-promise": "^4.3.1",
+    "eslint": "^8.20.0",
+    "eslint-plugin-promise": "^6.0.0",
     "nyc": "^15.1.0",
     "tape": "^5.2.0"
   },

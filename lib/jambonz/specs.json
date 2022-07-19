@@ -524,12 +524,16 @@
     "properties": {
       "actionHook": "object|string",
       "thresholdWordCount": "number",
-      "resolveTimeoutMs": "number",
-      "beep": "boolean",
+      "timers": "#amdTimers",
       "recognizer": "#recognizer"
     },
     "required": [
       "actionHook"
     ]
+  },
+  "amdTimers": {
+    "noSpeechTimeoutMs": "number",
+    "decisionTimeoutMs": "number",
+    "toneTimeoutMs": "number"
   }
 }

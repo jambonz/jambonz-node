@@ -506,6 +506,7 @@
     "properties": {
       "clientId": "string",
       "secret": "string",
+      "kryptonEndpoint": "string",
       "topic": "string",
       "utteranceDetectionMode": {
         "type": "string",

@@ -1,6 +1,7 @@
 {
   "sip_decline": {
     "properties": {
+      "id": "string",
       "status": "number",
       "reason": "string",
       "headers": "object"
@@ -11,6 +12,7 @@
   },
   "sip_request": {
     "properties": {
+      "id": "string",
       "method": "string",
       "body": "string",
       "headers": "object",
@@ -22,6 +24,7 @@
   },
   "sip_refer": {
     "properties": {
+      "id": "string",
       "referTo": "string",
       "referredBy": "string",
       "headers": "object",
@@ -34,13 +37,28 @@
   },
   "config": {
     "properties": {
+      "id": "string",
       "synthesizer": "#synthesizer",
       "recognizer": "#recognizer",
       "bargeIn": "#bargeIn",
       "record": "#recordOptions",
-      "amd": "#amd"
+      "listen": "#listenOptions",
+      "amd": "#amd",
+      "notifyEvents": "boolean"
     },
     "required": []
+  },
+  "listenOptions": {
+    "properties": {
+      "enable": "boolean",
+      "url": "string",
+      "sampleRate": "number",
+      "wsAuth": "#auth",
+      "metadata": "object"
+    },
+    "required": [
+      "enable"
+    ]
   },
   "bargeIn": {
     "properties": {
@@ -62,6 +80,7 @@
   },
   "dequeue": {
     "properties": {
+      "id": "string",
       "name": "string",
       "actionHook": "object|string",
       "timeout": "number",
@@ -73,6 +92,7 @@
   },
   "enqueue": {
     "properties": {
+      "id": "string",
       "name": "string",
       "actionHook": "object|string",
       "waitHook": "object|string",
@@ -84,11 +104,12 @@
   },
   "leave": {
     "properties": {
-      
+      "id": "string"
     }
   },
   "hangup": {
     "properties": {
+      "id": "string",
       "headers": "object"
     },
     "required": [
@@ -96,9 +117,13 @@
   },
   "play": {
     "properties": {
-      "url": "string",
+      "id": "string",
+      "url": "string|array",
       "loop": "number|string",
-      "earlyMedia": "boolean"
+      "earlyMedia": "boolean",
+      "seekOffset": "number|string",
+      "timeoutSecs": "number|string",
+      "actionHook": "object|string"
     },
     "required": [
       "url"
@@ -106,10 +131,12 @@
   },
   "say": {
     "properties": {
+      "id": "string",
       "text": "string|array",
       "loop": "number|string",
       "synthesizer": "#synthesizer",
-      "earlyMedia": "boolean"
+      "earlyMedia": "boolean",
+      "disableTtsCache": "boolean"
     },
     "required": [
       "text"
@@ -117,6 +144,7 @@
   },
   "gather": {
     "properties": {
+      "id": "string",
       "actionHook": "object|string",
       "finishOnKey": "string",
       "input": "array",
@@ -140,6 +168,7 @@
   },
   "conference": {
     "properties": {
+      "id": "string",
       "name": "string",
       "beep": "boolean",
       "startConferenceOnEnter": "boolean",
@@ -159,6 +188,7 @@
   },
   "dial": {
     "properties": {
+      "id": "string",
       "actionHook": "object|string",
       "answerOnBridge": "boolean",
       "callerId": "string",
@@ -182,6 +212,7 @@
   },
   "dialogflow": {
     "properties": {
+      "id": "string",
       "credentials": "object|string",
       "project": "string",
       "environment": "string",
@@ -210,6 +241,7 @@
   },
   "dtmf": {
     "properties": {
+      "id": "string",
       "dtmf": "string",
       "duration": "number"
     },
@@ -219,6 +251,7 @@
   },
   "lex": {
     "properties": {
+      "id": "string",
       "botId": "string",
       "botAlias": "string",
       "credentials": "object",
@@ -243,6 +276,7 @@
   },
   "listen": {
     "properties": {
+      "id": "string",
       "actionHook": "object|string",
       "auth": "#auth",
       "finishOnKey": "string",
@@ -254,6 +288,7 @@
       },
       "passDtmf": "boolean",
       "playBeep": "boolean",
+      "disableBidirectionalAudio": "boolean",
       "sampleRate": "number",
       "timeout": "number",
       "transcribe": "#transcribe",
@@ -267,6 +302,7 @@
   },
   "message": {
     "properties": {
+      "id": "string",
       "carrier": "string",
       "account_sid": "string",
       "message_sid": "string",
@@ -283,6 +319,7 @@
   },
   "pause": {
     "properties": {
+      "id": "string",
       "length": "number"
     },
     "required": [
@@ -291,6 +328,7 @@
   },
   "rasa": {
     "properties": {
+      "id": "string",
       "url": "string",
       "recognizer": "#recognizer",
       "tts": "#synthesizer",
@@ -325,6 +363,7 @@
   },
   "redirect": {
     "properties": {
+      "id": "string",
       "actionHook": "object|string"
     },
     "required": [
@@ -333,11 +372,13 @@
   },
   "rest:dial": {
     "properties": {
+      "id": "string",
       "account_sid": "string",
       "application_sid": "string",
       "call_hook": "object|string",
       "call_status_hook": "object|string",
       "from": "string",
+      "fromHost": "string",
       "speech_synthesis_vendor": "string",
       "speech_synthesis_voice": "string",
       "speech_synthesis_language": "string",
@@ -356,6 +397,7 @@
   },
   "tag": {
     "properties": {
+      "id": "string",
       "data": "object"
     },
     "required": [
@@ -364,6 +406,7 @@
   },
   "transcribe": {
     "properties": {
+      "id": "string",
       "transcriptionHook": "string",
       "recognizer": "#recognizer",
       "earlyMedia": "boolean"
@@ -384,6 +427,7 @@
         "enum": ["GET", "POST"]
       },
       "headers": "object",
+      "from": "#dialFrom",
       "name": "string",
       "number": "string",
       "sipUri": "string",
@@ -395,6 +439,14 @@
     },
     "required": [
       "type"
+    ]
+  },
+  "dialFrom": {
+    "properties": {
+      "user": "string",
+      "host": "string"
+    },
+    "required": [
     ]
   },
   "auth": {
@@ -422,8 +474,7 @@
       "gender": {
         "type": "string",
         "enum": ["MALE", "FEMALE", "NEUTRAL"]
-      },
-      "azureServiceEndpoint": "string"
+      }
     },
     "required": [
       "vendor"
@@ -495,6 +546,7 @@
       "requestSnr": "boolean",
       "initialSpeechTimeoutMs": "number",
       "azureServiceEndpoint": "string",
+      "azureSttEndpointId": "string",
       "asrDtmfTerminationDigit": "string",
       "asrTimeout": "number",
       "nuanceOptions": "#nuanceOptions",
@@ -512,7 +564,6 @@
       "ttsApiKey": "string",
       "ttsRegion": "string",
       "instanceId": "string",
-      "region": "string",
       "model": "string",
       "languageCustomizationId": "string",
       "acousticCustomizationId": "string",
@@ -570,7 +621,7 @@
       "keywords": "array",
       "endpointing": "boolean",
       "vadTurnoff": "number",
-      "tag": "stirng"
+      "tag": "string"
     }
   },
   "nuanceOptions": {
@@ -694,7 +745,7 @@
     "properties": {
       "enable": "boolean",
       "voiceMs": "number",
-      "mode": "number"  
+      "mode": "number"
     },
     "required": [
       "enable"
@@ -716,7 +767,7 @@
       "noSpeechTimeoutMs": "number",
       "decisionTimeoutMs": "number",
       "toneTimeoutMs": "number",
-      "greetingCompletionTimeoutMs": "number"  
+      "greetingCompletionTimeoutMs": "number"
     }
   }
 }

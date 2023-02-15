@@ -10,7 +10,9 @@ test('unit tests', (t) => {
 
   let app = new WebhookResponse();
   app.sip_decline(fetchData(require('./data/good/sip-decline')));
-  t.pass('sip_decline: passes');
+  let json = app.toJSON();
+  // verify that the verb is sip:decline not sip_decline (special case for verbs with colons)
+  t.ok(json[0].verb === 'sip:decline', 'sip_decline: passes');
   app.say(fetchData(require('./data/good/say')));
   t.pass('say: passes');
   app.say(fetchData(require('./data/good/say-text-array')));

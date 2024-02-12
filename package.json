@@ -1,6 +1,6 @@
 {
   "name": "@jambonz/node-client",
-  "version": "0.3.64",
+  "version": "0.3.65",
   "description": "Node.js client for building jambonz applications (jambonz.org)",
   "main": "lib/index.js",
   "scripts": {

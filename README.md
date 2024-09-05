@@ -1,6 +1,6 @@
 # @jambonz/node-client
 
-A Node.js SDK for the open source [jambonz](jambonz.org) CPaaS platform.  Node.js applications can use this library to respond to [jambonz webhooks](https://www.jambonz.org/docs/webhooks/overview/) and to make [REST API calls](https://api.jambonz.org/) to a jambonz platform.
+A Node.js SDK for the open source [jambonz](https://jambonz.org) CPaaS platform.  Node.js applications can use this library to respond to [jambonz webhooks](https://www.jambonz.org/docs/webhooks/overview/) and to make [REST API calls](https://api.jambonz.org/) to a jambonz platform.
 
 > Note: One suggested way to get up and running with this Node SDK is to use the `npx create-jambonz-app` command, which will scaffold out a jambonz application for you using this SDK.
 

@@ -1,6 +1,6 @@
 # @jambonz/node-client
 
-A Node.js SDK for the open source [jambonz](docs.jambonz.org) CPaaS platform.  Node.js applications can use this library to respond to [jambonz webhooks](https://docs.jambonz.org/jambonz/) and to make [REST API calls](https://docs.jambonz.org/rest/) to a jambonz platform.
+A Node.js SDK for the open source [jambonz](jambonz.org) CPaaS platform.  Node.js applications can use this library to respond to [jambonz webhooks](https://www.jambonz.org/docs/webhooks/overview/) and to make [REST API calls](https://api.jambonz.org/) to a jambonz platform.
 
 > Note: One suggested way to get up and running with this Node SDK is to use the `npx create-jambonz-app` command, which will scaffold out a jambonz application for you using this SDK.
 
@@ -31,7 +31,7 @@ app.listen(port, () => {
   logger.info(`listening at http://localhost:${port}`);
 });
 ```
-[See here](https://docs.jambonz.org/jambonz/) for information on the available verbs you can use in a jambonz application, and for their associated properties.
+[See here](https://www.jambonz.org/docs/webhooks/overview/) for information on the available verbs you can use in a jambonz application, and for their associated properties.
 
 #### Verifying webhook signature
 If your jambonz server includes a Jambonz-Signature header on webhook requests, you can verify that the request was signed by jambonz using your webhook secret as follows:
@@ -82,7 +82,7 @@ const sid = await client.calls.create({
   call_status_hook: 'http://myurl.com/call-status'
 });
 ```
-[See here](https://docs.jambonz.org/rest/#create-a-call) for further details.
+[See here](https://api.jambonz.org/#243a2edd-7999-41db-bd0d-08082bbab401) for further details.
 
 ##### Updating a call
 To update a call in progress -- for example to mute/unmute, hangup the call etc -- you need to know the call sid.  Typically you would get this from a webhook sent from an existing call event.
@@ -97,7 +97,7 @@ To update a call in progress -- for example to mute/unmute, hangup the call etc 
     }
   });
 ```
-[See here](https://docs.jambonz.org/rest/#updating-a-call) for further details.
+[See here](https://api.jambonz.org/#9c80ca99-4036-4a47-8823-4609e3fd4788) for further details.
 
 ### Example 
 

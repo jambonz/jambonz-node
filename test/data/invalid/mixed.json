@@ -1,0 +1,12 @@
+{
+  "text": {
+    "type": "string"
+  },
+  "/hello": {
+    "text": {
+      "description": "Welcome message",
+      "type": "invalid_type",
+      "required": true
+    }
+  }
+} 

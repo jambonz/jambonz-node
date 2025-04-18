@@ -1,0 +1,13 @@
+{
+  "text": {
+    "description": "Default text property",
+    "type": "string"
+  },
+  "/hello": {
+    "text": {
+      "description": "Welcome message",
+      "type": "string",
+      "required": true
+    }
+  }
+} 

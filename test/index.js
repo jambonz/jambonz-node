@@ -45,6 +45,8 @@ test('unit tests', (t) => {
   t.end();
 });
 
+// Run validator tests
+require('./validator');
 
 const errInvalidInstruction = () => makeTask(logger, require('./data/bad/unknown-instruction'));
 const errUnknownProperty = () => makeTask(logger, require('./data/bad/unknown-property'));

@@ -1,0 +1,12 @@
+{
+  "text": {
+    "description": "Welcome message",
+    "type": "string",
+    "required": true
+  },
+  "timeout": {
+    "description": "Timeout in seconds",
+    "type": "number",
+    "default": 30
+  }
+} 

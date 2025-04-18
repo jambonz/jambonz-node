@@ -1,0 +1,16 @@
+{
+  "apiKey": {
+    "description": "API key for the service",
+    "type": "string",
+    "required": true,
+    "obscure": true,
+    "value": "secret123"
+  },
+  "/hello": {
+    "text": {
+      "description": "Welcome message",
+      "type": "string",
+      "required": true
+    }
+  }
+} 

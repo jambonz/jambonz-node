@@ -24,6 +24,10 @@
     },
     "obscure": {
       "type": "boolean"
+    },
+    "uiHint": {
+      "type": "string",
+      "enum": ["input", "textarea", "filepicker"]
     }
   },
   "required": ["type", "description"]

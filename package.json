@@ -15,7 +15,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "@jambonz/verb-specifications": "^0.0.104",
+    "@jambonz/verb-specifications": "^0.0.107",
     "ajv": "^8.12.0",
     "ajv-formats": "^2.1.1",
     "bent": "^7.3.12",

@@ -28,6 +28,10 @@
     "uiHint": {
       "type": "string",
       "enum": ["input", "textarea", "filepicker"]
+    },
+    "jambonzResource": {
+      "type": "string",
+      "enum": ["carriers"]
     }
   },
   "required": ["type", "description"]

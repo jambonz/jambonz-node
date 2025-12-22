@@ -1,0 +1,673 @@
+openapi: 3.0.0
+info:
+  title: Jambonz API
+  description: Jambonz REST API specification
+  contact:
+    email: daveh@drachtio.org
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  version: 1.0.0
+servers:
+  - url: https://api.jambonz.cloud/v1
+security:
+  - bearerAuth: []
+tags:
+  - name: Calls
+    description: Control Calls
+  - name: Conferences
+    description: Confernce Participants
+
+paths:
+  /Accounts/{AccountSid}/Calls:
+    post:
+      tags:
+        - Calls
+      summary: create a call
+      operationId: createCall
+      parameters:
+        - name: AccountSid
+          in: path
+          required: true
+          schema:
+            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              required:
+                - from
+                - to
+              type: object
+              properties:
+                application_sid:
+                  type: string
+                  format: uuid
+                  description: The application to use to control this call.  Either application_sid or call_hook is required.
+                answerOnBridge:
+                  type: boolean
+                  description: If set to true, the inbound call will ring until the number that was dialed answers the call, and at that point a 200 OK will be sent on the inbound leg.  If false, the inbound call will be answered immediately as the outbound call is placed.
+                  example: false
+                call_hook:
+                  $ref: "#/components/schemas/Webhook"
+                  example:
+                    url: https://example.com/callhook
+                    method: POST
+                call_status_hook:
+                  $ref: "#/components/schemas/Webhook"
+                  example:
+                    url: https://example.com/status
+                    method: POST
+                from:
+                  type: string
+                  description: The calling party number
+                  example: "16175551212"
+                fromHost:
+                  type: string
+                  description: The hostname to put in the SIP From header of the INVITE
+                  example: sip.example.com
+                timeout:
+                  type: integer
+                  description: The number of seconds to wait for call to be answered.  Defaults to 60.
+                  example: 30
+                timeLimit:
+                  type: integer
+                  description: The max length of call in seconds
+                  example: 60
+                tag:
+                  type: object
+                  description: Initial set of customer-supplied metadata to associate with the call (see jambonz 'tag' verb)
+                  example:
+                    callCount: 10
+                to:
+                  $ref: "#/components/schemas/Target"
+                  description: Destination for call
+                headers:
+                  type: object
+                  description: The customer SIP headers to associate with the call
+                  example:
+                    X-Custom-Header: Hello
+                sipRequestWithinDialogHook:
+                  type: string
+                  description: The sip indialog hook to receive session messages
+                  example: /customHook
+                speech_synthesis_vendor:
+                  type: string
+                  description: The vendor for Text to Speech (required if application_sid is not used)
+                  example: google
+                speech_synthesis_language:
+                  type: string
+                  description: The language for Text to Speech (required if application_sid is not used)
+                  example: en-US
+                speech_synthesis_voice:
+                  type: string
+                  description: The voice for Text to Speech (required if application_sid is not used)
+                  example: Wavenet-A
+                speech_recognizer_vendor:
+                  type: string
+                  description: The vendor for Speech to Text (required if application_sid is not used)
+                  example: google
+                speech_recognizer_language:
+                  type: string
+                  description: The language for Speech to Text (required if application_sid is not used)
+                  example: en-US
+                amd:
+                  $ref: "#/components/schemas/amd"
+      responses:
+        "201":
+          description: call successfully created
+          content:
+            application/json:
+              schema:
+                required:
+                  - sid
+                properties:
+                  sid:
+                    type: string
+                    format: uuid
+                    example: 2531329f-fb09-4ef7-887e-84e648214436
+        "400":
+          description: bad request
+    get:
+      tags:
+        - Calls
+      summary: list calls
+      operationId: listCalls
+      parameters:
+        - name: AccountSid
+          in: path
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: direction
+          required: false
+          schema:
+            type: string
+            enum:
+              - inbound
+              - outbound
+          description: call direction to retrieve
+        - in: query
+          name: from
+          required: false
+          schema:
+            type: string
+          description: calling number to retrieve
+        - in: query
+          name: to
+          required: false
+          schema:
+            type: string
+          description: called number to retrieve
+        - in: query
+          name: callStatus
+          required: false
+          schema:
+            type: string
+            enum:
+              - trying
+              - ringing
+              - early-media
+              - in-progress
+              - completed
+              - failed
+              - busy
+              - no-answer
+              - queued
+          description: call status to retrieve
+      responses:
+        "200":
+          description: list of calls for a specified account
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Call"
+        "500":
+          description: system error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+  /Accounts/{AccountSid}/Calls/{CallSid}:
+    parameters:
+      - name: AccountSid
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+      - name: CallSid
+        in: path
+        required: true
+        style: simple
+        explode: false
+        schema:
+          type: string
+    delete:
+      tags:
+        - Calls
+      summary: delete a call
+      operationId: deleteCall
+      responses:
+        "204":
+          description: call successfully deleted
+        "404":
+          description: call not found
+        "422":
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+        "500":
+          description: system error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+    get:
+      tags:
+        - Calls
+      summary: retrieve a call
+      operationId: getCall
+      responses:
+        "200":
+          description: call found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Call"
+        "404":
+          description: call not found
+        "500":
+          description: system error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+    put:
+      tags:
+        - Calls
+      summary: update a call
+      operationId: updateCall
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                call_hook:
+                  $ref: "#/components/schemas/Webhook"
+                child_call_hook:
+                  $ref: "#/components/schemas/Webhook"
+                call_status:
+                  type: string
+                  enum:
+                    - completed
+                    - no-answer
+                conf_mute_status:
+                  type: string
+                  enum:
+                    - mute
+                    - unmute
+                conf_hold_status:
+                  type: string
+                  enum:
+                    - hold
+                    - unhold
+                listen_status:
+                  type: string
+                  enum:
+                    - pause
+                    - silence
+                    - resume
+                mute_status:
+                  type: string
+                  enum:
+                    - mute
+                    - unmute
+                transcribe_status:
+                  type: string
+                  enum:
+                    - pause
+                    - resume
+                whisper:
+                  oneOf:
+                    - type: object
+                      properties:
+                        verb:
+                          enum:
+                            - say
+                            - play
+                          description: See [Say](/verbs/verbs/say) or [Play](/verbs/verbs/play) for details of the properties
+                    - type: array
+                      items:
+                        type: object
+                        properties:
+                          verb:
+                            enum:
+                              - say
+                              - play
+                            description: See [Say](/verbs/verbs/say) or [Play](/verbs/verbs/play) for details of the properties
+                sip_request:
+                  type: object
+                  properties:
+                    method:
+                      type: string
+                    content_type:
+                      type: string
+                    content:
+                      type: string
+                    headers:
+                      type: object
+                record:
+                  type: object
+                  properties:
+                    action:
+                      type: string
+                      enum:
+                        - startCallRecording
+                        - stopCallRecording
+                        - pauseCallRecording
+                        - resumeCallRecording
+                    recordingID:
+                      type: string
+                    siprecServerURL:
+                      type: string
+                conferenceParticipantAction:
+                  type: object
+                  properties:
+                    action:
+                      type: string
+                      enum:
+                        - tag
+                        - untag
+                        - coach
+                        - uncoach
+                        - mute
+                        - unmute
+                        - hold
+                        - unhold
+                    tag:
+                      type: string
+                dtmf:
+                  type: object
+                  properties:
+                    digit:
+                      type: string
+                      enum:
+                        - "1"
+                        - "2"
+                        - "3"
+                        - "4"
+                        - "5"
+                        - "6"
+                        - "7"
+                        - "8"
+                        - "9"
+                        - "0"
+                        - "*"
+                        - "#"
+                      description: "Single digit to send"
+                    duration:
+                      type: integer
+                      default: 250
+                      description: "Duration of the tone in ms"
+                  required:
+                    - digit
+      responses:
+        "200":
+          description: Accepted
+        "202":
+          description: Accepted
+        "400":
+          description: bad request
+        "404":
+          description: call not found
+        "422":
+          description: unprocessable entity
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+        "500":
+          description: system error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+  /Accounts/{AccountSid}/Queues:
+    parameters:
+      - name: AccountSid
+        in: path
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - in: query
+        name: search
+        required: false
+        schema:
+          type: string
+          description: queue name of data to retrieve
+    get:
+      tags:
+        - Queues
+      summary: retrieve active queues for an account
+      operationId: listQueues
+      responses:
+        "200":
+          description: retrieve active queues records for a specified account
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    name:
+                      type: string
+                    length:
+                      type: string
+  /Accounts/{AccountSid}/Conferences:
+    get:
+      tags:
+        - Conferences
+      summary: list conferences
+      operationId: listConferences
+      parameters:
+        - name: AccountSid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: list of conferences for a specified account
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "500":
+          description: system error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+  /Accounts/{AccountSid}/CallCount:
+    get:
+      tags:
+        - Calls
+      summary: get call count
+      operationId: getCallCount
+      parameters:
+        - name: AccountSid
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: count of active calls for an account
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  inbound:
+                    type: number
+                    description: Number of inbound calls to the platform
+                    example: 2
+                  outbound:
+                    type: number
+                    description: Number of outbound calls to the platform
+                    example: 0
+        "400":
+          description: error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GeneralError"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: token
+  schemas:
+    GeneralError:
+      type: object
+      required:
+        - msg
+      properties:
+        msg:
+          type: string
+      example:
+        msg: specific error detail will be provided here
+    Webhook:
+      type: object
+      properties:
+        webhook_sid:
+          type: string
+          format: uuid
+        url:
+          type: string
+          format: url
+        method:
+          type: string
+          enum:
+            - get
+            - post
+        username:
+          type: string
+        password:
+          type: string
+      required:
+        - url
+      example:
+        url: https://acme.com
+        method: POST
+    Call:
+      type: object
+      properties:
+        account_sid:
+          type: string
+          format: uuid
+        application_sid:
+          type: string
+          format: uuid
+        call_id:
+          type: string
+        call_sid:
+          type: string
+          format: uuid
+        call_status:
+          type: string
+          enum:
+            - trying
+            - ringing
+            - alerting
+            - in-progress
+            - completed
+            - busy
+            - no-answer
+            - failed
+            - queued
+        caller_name:
+          type: string
+        direction:
+          type: string
+          enum:
+            - inbound
+            - outbound
+        duration:
+          type: integer
+        from:
+          type: string
+        originating_sip_trunk_name:
+          type: string
+        parent_call_sid:
+          type: string
+          format: uuid
+        service_url:
+          type: string
+        sip_status:
+          type: integer
+        to:
+          type: string
+      required:
+        - account_sid
+        - call_id
+        - call_sid
+        - call_status
+        - direction
+        - from
+        - service_url
+        - sip_status
+        - to
+    Target:
+      properties:
+        type:
+          type: string
+          enum:
+            - phone
+            - sip
+            - user
+            - teams
+        number:
+          type: string
+          description: A phone number to call (when type is phone)
+        sipUri:
+          type: string
+          description: A SIP URI to call (when type is sip)
+        tenant:
+          type: string
+          description: Microsoft Teams customer tenant domain name (when type is teams)
+        trunk:
+          type: string
+          description: The name of the Carrier that should be used to deliver this call (when type is phone)
+        vmail:
+          type: boolean
+          description: Dial directly into user's voicemail to leave a message (MS Teams only)
+        overrideTo:
+          type: string
+          description: A SIP URI that, if provided, will be used as the To header in the outbound INVITE (not needed in most cases)
+        name:
+          type: string
+          description: The name of a registered jambonz user to call (when type is user)
+        auth:
+          type: object
+          properties:
+            username:
+              type: string
+              description: The username to use for SIP authentication, if challenged
+            password:
+              type: string
+              description: The password to use for SIP authentication, if challenged
+        proxy:
+          type: string
+          description: SIP Proxy to use for the outgoing INVITE
+          example: sip:192.0.0.1:5080
+      required:
+        - type
+      example:
+        type: phone
+        number: "+16172375080"
+    amd:
+      type: object
+      properties:
+        actionHook:
+          type: string
+          description: Webhook to send AMD events.
+        thresholdWordCount:
+          type: number
+          description: Number of spoken words in a greeting that result in an amd_machine_detected result.
+        digitCount:
+          type: number
+          description: Number of digits in a greeting to trigger a amd_machine_detected result. 0 is off
+        timers:
+          type: object
+          properties:
+            decisionTimeoutMs:
+              type: number
+              default: 15000
+              description: Time in milliseconds to wait before returning amd_decision_timeout.
+            greetingCompletionTimeoutMs:
+              type: number
+              default: 2000
+              description: Silence in milliseconds to wait for during greeting before returning amd_machine_stopped_speaking.
+            noSpeechTimeoutMs:
+              type: number
+              default: 5000
+              description: Time in milliseconds to wait for speech before returning amd_no_speech_detected.
+            toneTimeoutMs:
+              type: number
+              default: 20000
+              description: Time in milliseconds to wait to hear a tone.
